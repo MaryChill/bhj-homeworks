@@ -6,11 +6,7 @@ let clicker__counterNumber = clicker__counter.textContent;
 function clikCookie() {
     clicker__counterNumber++;
     clicker__counter.textContent = clicker__counterNumber;
-    if (clicker__counterNumber % 2 === 0) {
-        cookie.width = '250';
-    } else {
-        cookie.width = '200';
-    }
+    cookie.width = ++clicker__counter.textContent % 2 ? 250 : 200;
 }
 
 cookie.onclick = clikCookie;
