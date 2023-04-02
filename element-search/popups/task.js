@@ -9,7 +9,10 @@ function closePopup() {
 modalMain.classList.add('modal_active');
 let showSuccessElement = showSuccess.shift();
 showSuccessElement.classList.remove('modal__close');
-showSuccessElement.onclick = () => modalSuccess.classList.add('modal_active');
+showSuccessElement.onclick = () => {
+    modalSuccess.classList.add('modal_active');
+    modalMain.classList.remove('modal_active');
+}
 
 const modalClose = Array.from(document.getElementsByClassName('modal__close'));
 

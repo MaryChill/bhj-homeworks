@@ -1,14 +1,14 @@
 const sliderArrows = Array.from(document.getElementsByClassName('slider__arrow'));
 const sliderItems = Array.from(document.getElementsByClassName('slider__item'));
-let sliderItemActive;
 let slidersCount = sliderItems.length;
-let nextIndex;
 
 sliderArrows.forEach((elem, index) => {
     elem.addEventListener('click', () => showSlide(index))
 })
 
 function showSlide (index) {
+    let nextIndex;
+    let sliderItemActive;
     sliderItemActive = sliderItems.findIndex( element => {
         if (element.classList.contains('slider__item_active')) {
             return true;
