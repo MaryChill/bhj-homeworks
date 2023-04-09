@@ -9,22 +9,24 @@ let robotMessages = ['Отстань','Нет','Не пиши сюда боль�
 
 chatWidgetInput.addEventListener('keydown', key => {
     if (key.keyCode === 13) {
-        let message = chatWidgetInput.value;
+        let message = chatWidgetInput.value.trim();
         if (chatWidgetInput.checkValidity()) {
             let time = new Date().toLocaleTimeString();
             let answer = Math.floor(Math.random() * robotMessages.length);
-            chatWidgetMessages.innerHTML += 
-            `<div class="message message_client">
-                <div class="message__time">${time}</div>
-                <div class="message__text">${message}</div>
-            </div>`;
-            chatWidgetInput.value = '';
-            chatWidgetMessages.innerHTML += `
-            <div class="message ">
-                <div class="message__time">${time}</div>
-                <div class="message__text">${robotMessages[answer]}</div>
-            </div>`;
-            
+            if (message != '') {
+                chatWidgetMessages.innerHTML += 
+                `<div class="message message_client">
+                    <div class="message__time">${time}</div>
+                    <div class="message__text">${message}</div>
+                </div>`;
+                chatWidgetInput.value = '';
+                chatWidgetMessages.innerHTML += `
+                <div class="message ">
+                    <div class="message__time">${time}</div>
+                    <div class="message__text">${robotMessages[answer]}</div>
+                </div>`;
+            }    
         }
+
     }   
 })
