@@ -2,7 +2,8 @@ const taskInput = document.getElementById('task__input');
 const tasksForm = document.getElementById('tasks__form');
 const tasksList = document.getElementById('tasks__list');
 
-tasksForm.addEventListener('submit', () => {
+tasksForm.addEventListener('submit', (elem) => {
+    elem.preventDefault();
     let todo = taskInput.value.trim();
     if (todo) {
         tasksList.insertAdjacentHTML('beforeend', `
@@ -13,10 +14,9 @@ tasksForm.addEventListener('submit', () => {
             <a href="#" class="task__remove">&times;</a>
         </div>
         `)
-        let taskRemove = Array.from(document.querySelectorAll('.task__remove'));
-        taskRemove.forEach(index => index.addEventListener('click', () => {
-            index.parentElement.remove();
-        }))
+        let child = tasksList.lastElementChild;
+        let taskRemove = child.lastElementChild;
+        taskRemove.addEventListener('click', () => child.remove());
     }
     taskInput.value = '';
 })

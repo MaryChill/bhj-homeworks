@@ -18,36 +18,24 @@ productAdd.forEach(index => index.addEventListener('click', (id, img, sum) => {
     id = index.closest('.product').getAttribute('data-id');
     sum = Number(sum);
 
-    let elementReplay = check(id);
-        if (elementReplay != undefined) {
-            let count = elementReplay.lastElementChild.textContent;
-            count = Number(count);
-            let quantity = count + sum;
-            elementReplay.lastElementChild.textContent = quantity;
-        } else {  
-            cartProducts.insertAdjacentHTML('beforeend', `
-            <div class="cart__product" data-id="${id}">
-                <img class="cart__product-image" src="${img}">
-                <div class="cart__product-count">${sum}</div>
-            </div>
-            `);
-        } 
-}))
-
-function check (value) {
-    let replay;
     let productsChildren = Array.from(cartProducts.children);
-    let idChildren = [];
-    productsChildren.forEach(elem => idChildren.push(elem.getAttribute('data-id')))
-    idChildren.forEach(index => {
-        if (index == value) {
-            productsChildren.forEach(index => {
-                    if (index.getAttribute('data-id') == value) {
-                        replay = index;
-                    }
-                })
-        }
-        
-    })
-    return replay;
-}
+    if (productsChildren.length != 0) {
+        productsChildren.find((value) => {
+            let dataIdCheck = value.getAttribute('data-id');
+            if (dataIdCheck == id) {
+                let count =value.lastElementChild.textContent;
+                count = Number(count);
+                let quantity = count + sum;
+                value.lastElementChild.textContent = quantity;
+            } 
+        }    
+            
+    )};
+    cartProducts.insertAdjacentHTML('beforeend', `
+    <div class="cart__product" data-id="${id}">
+        <img class="cart__product-image" src="${img}">
+        <div class="cart__product-count">${sum}</div>
+    </div>
+    `);
+         
+}))
