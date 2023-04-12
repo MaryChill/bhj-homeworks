@@ -19,23 +19,24 @@ productAdd.forEach(index => index.addEventListener('click', (id, img, sum) => {
     sum = Number(sum);
 
     let productsChildren = Array.from(cartProducts.children);
-    if (productsChildren.length != 0) {
-        productsChildren.find((value) => {
-            let dataIdCheck = value.getAttribute('data-id');
-            if (dataIdCheck == id) {
-                let count =value.lastElementChild.textContent;
-                count = Number(count);
-                let quantity = count + sum;
-                value.lastElementChild.textContent = quantity;
-            } 
-        }    
-            
-    )};
-    cartProducts.insertAdjacentHTML('beforeend', `
-    <div class="cart__product" data-id="${id}">
-        <img class="cart__product-image" src="${img}">
-        <div class="cart__product-count">${sum}</div>
-    </div>
-    `);
-         
+    const productInCard = productsChildren.find((elem) => {
+        let idProduct = elem.getAttribute('data-id');
+        if (idProduct == id) {
+            return true;
+        }
+
+    });
+        if (productInCard) {
+            let count = productInCard.lastElementChild.textContent;
+            count = Number(count);
+            let quantity = count + sum;
+            productInCard.lastElementChild.textContent = quantity;
+        } else {
+            cartProducts.insertAdjacentHTML('beforeend', `
+            <div class="cart__product" data-id="${id}">
+                <img class="cart__product-image" src="${img}">
+                <div class="cart__product-count">${sum}</div>
+            </div>
+            `);
+        }
 }))
